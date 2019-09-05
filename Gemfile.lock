@@ -57,15 +57,21 @@ GEM
       tzinfo (~> 1.1)
       zeitwerk (~> 2.1, >= 2.1.8)
     ansi (1.5.0)
+    autoprefixer-rails (9.6.1.1)
+      execjs
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (11.0.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     erubi (1.8.0)
+    execjs (2.7.0)
     ffi (1.11.1)
     formatador (0.2.5)
     globalid (0.4.2)
@@ -214,6 +220,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
+  bootstrap-sass (= 3.3.7)
   byebug
   guard
   guard-minitest
