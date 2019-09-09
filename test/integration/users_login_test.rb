@@ -31,10 +31,24 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 		delete logout_path
 		assert_not is_logged_in?
 		assert_redirected_to root_path
+		# 二人目 #
+		delete logout_path
 		follow_redirect!
 		assert_select "a[href=?]", login_path
 		assert_select "a[href=?]", logout_path, count: 0
 		assert_select "a[href=?]", user_path(@user), count: 0
+	end
+
+	test "login with remembering" do
+		log_in_as(@user, remember_me: '1')
+		assert_equal cookies[:remember_token], assigns(:user).remember_token
+	end
+
+	test "login with no remembering" do
+		# log_in_as(@user, remember_me: '1')
+		# delete logout_path
+		log_in_as(@user, remember_me: '0')
+		assert cookies["remember_token"].nil?
 	end
 
 end
