@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
+
+	def setup
+    ActionMailer::Base.deliveries.clear
+  end
 	
 	test "invalid signup information" do
 		get signup_path
@@ -24,11 +28,23 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 																					email: "user@example.com",
 																					password:              "password",
 																					password_confirmation: "password" } }
-    end
+		end
+		assert_equal 1, ActionMailer::Base.deliveries.size
+		user = assigns(:user)																# <---
+		# try login with invalid user												# 上のpostリクエストによって、Userコントローラのcreateアクション内でインスタンス変数
+		log_in_as(user)																			# @userが作られるため、assignsによってそのuser情報を取り出している。
+		assert_not is_logged_in?
+		# valid_token is not right
+		get edit_account_activation_path("invalid token", email: user.email)
+		assert_not is_logged_in?
+		# valid_email is not right
+		get edit_account_activation_path(user.activation_token, email: "wrong")
+		assert_not is_logged_in?
+		# login with valid user
+		get edit_account_activation_path(user.activation_token, email: user.email)
+		assert user.reload.activated?
     follow_redirect!
 		assert_template 'users/show'
-		# assert_select "div.alert-success", "Welcome to the Sample App!"		<- not recommend
-		assert_not flash.empty?
 		assert is_logged_in?
   end
 end
