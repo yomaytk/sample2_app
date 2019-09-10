@@ -11,6 +11,9 @@ gem 'rails', '~> 6.0.0'
 gem "jquery-rails"
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt',         '3.1.12'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 gem 'gravtastic'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
