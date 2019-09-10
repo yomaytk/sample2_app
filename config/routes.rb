@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 		get  '/about',   to: 'static_pages#about'
 		get  '/contact', to: 'static_pages#contact'
 
-		resources  :users
 		get  '/signup',  to: 'users#new'
 		get  '/users/:id',  to: 'users#show', id: /\d+/
 		post '/signup',  to: 'users#create'
@@ -14,4 +13,6 @@ Rails.application.routes.draw do
 		post '/login', to: 'sessions#create'
 		delete '/logout', to: 'sessions#destroy'
 		
+		resources  :users
+		resources	 :account_activation, only: [:edit]
   end
