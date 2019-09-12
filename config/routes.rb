@@ -16,8 +16,10 @@ Rails.application.routes.draw do
 		delete '/logout', to: 'sessions#destroy'
 
 		get '/password_resets', to: 'password_resets#new'
+		get '/microposts',	to: 'static_pages#home'
 		
 		resources  :users
 		resources	 :account_activations, only: [:edit]
 		resources	 :password_resets, only: [:new, :create, :edit, :update]
+		resources	 :microposts, only: [:create, :destroy]
   end

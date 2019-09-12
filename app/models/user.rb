@@ -64,7 +64,11 @@ class User < ApplicationRecord
 
 	def password_reset_expired?
     reset_sent_at < 2.hours.ago
-  end
+	end
+	
+	def feed																			# <-- def feed
+    Micropost.where("user_id = ?", id)          #       microposts
+  end																						#     end
 
 	private
 		

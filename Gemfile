@@ -11,6 +11,8 @@ gem 'rails', '~> 6.0.0'
 gem "jquery-rails"
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt',         '3.1.12'
+gem 'carrierwave',             '1.2.2'
+gem 'mini_magick',             '4.7.0'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
@@ -67,7 +69,8 @@ group :test do
   end
   
 group :production do
-  gem 'pg', '0.20.0'
+	gem 'pg', '0.20.0'
+	gem 'fog', '1.42'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
