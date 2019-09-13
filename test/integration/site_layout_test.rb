@@ -35,4 +35,12 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
 		assert_select "a[href=?]", contact_path
 	end
 
+	test "micropost and follow should display" do
+		log_in_as(@user)
+		get root_path
+		assert_match @user.microposts.count.to_s, response.body
+		assert_match @user.following.count.to_s, response.body
+		assert_match @user.followers.count.to_s, response.body
+	end
+
 end
