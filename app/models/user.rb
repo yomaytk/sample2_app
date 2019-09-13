@@ -78,7 +78,7 @@ class User < ApplicationRecord
     following_ids = "SELECT followed_id FROM relationships
 											WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
-											OR user_id = :user_id", user_id: id)
+											OR user_id = :user_id OR in_reply_to = :user_name", user_id: id, user_name: name)
   end																					
 
 	def following?(other_user)

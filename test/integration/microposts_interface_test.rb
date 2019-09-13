@@ -53,4 +53,22 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
 		assert_match "1 micropost", response.body
 	end
 
+	test "reply micropost test" do
+		log_in_as(@user)
+		get root_path
+		to_user = @other_user.name
+		assert_difference 'Micropost.count', 1 do
+			post microposts_path, params: { micropost: { content: "@#{to_user}.reply" } }
+		end
+		assert_difference "@other_user.feed.count", 1 do
+			post microposts_path, params: { micropost: { content: "@#{to_user}.reply" } }
+		end
+		assert_difference "@user.feed.count", 1 do
+			post microposts_path, params: { micropost: { content: "@#{to_user}.reply" } }
+		end
+		assert_no_difference "Micropost.count" do
+			post microposts_path, params: { micropost: { content: "@WhoAreYou.reply" } }
+		end
+	end
+
 end

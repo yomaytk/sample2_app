@@ -5,8 +5,19 @@ class MicropostsController < ApplicationController
 	
 	def create
 		@micropost = current_user.microposts.build(micropost_params)
-		if @micropost.save 			# <-- yield validation?
-			flash[:success] = "Micropost is created!"
+		@micropost.in_reply_to = @micropost.including_replies
+		to_user_str = @micropost.in_reply_to
+		to_user = User.find_by(name: to_user_str)
+		if @micropost.valid?
+			if to_user_str.nil?
+				flash[:success] = "Micropost is created!"
+				@micropost.save
+			elsif !to_user_str.nil? && to_user.nil?
+				flash[:danger] = "Cannot find the reply user..."
+			else
+				flash[:success] = "reply to #{to_user_str}!"
+				@micropost.save
+			end
 			redirect_to root_url
 		else
 			@feed_items = current_user.feed.paginate(page: params[:page])			
