@@ -20,7 +20,8 @@ class User < ApplicationRecord
 																		format: { with: VALID_EMAIL_REGEX },
 																		uniqueness: {case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+	validates :id_number, presence: true, uniqueness: true, length: { minimum: 6}
 
   include Gravtastic
 	gravtastic
@@ -78,7 +79,7 @@ class User < ApplicationRecord
     following_ids = "SELECT followed_id FROM relationships
 											WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
-											OR user_id = :user_id OR in_reply_to = :user_name", user_id: id, user_name: name)
+											OR user_id = :user_id OR in_reply_to = :user_id_number", user_id: id, user_id_number: id_number)
   end																					
 
 	def following?(other_user)

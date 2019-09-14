@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-	@user = User.new(name: "Example User", email: "user@example.com",
+	@user = User.new(name: "Example User", id_number: "example user", email: "user@example.com",
 										password: "foobar", password_confirmation: "foobar")
   end
 
@@ -115,6 +115,13 @@ class UserTest < ActiveSupport::TestCase
     archer.microposts.each do |post_unfollowed|
       assert_not michael.feed.include?(post_unfollowed)
     end
-  end
+	end
+	
+	test "id_number must not be duplicated" do
+		u1 = users(:michael)
+		dup_user = User.new(name: "id_numtest", id_number: u1.id_number, email: "id_numtest@example.com",
+												password: "foobar", password_confirmation: "foobar")
+		assert dup_user.invalid?
+	end
 
 end

@@ -7,7 +7,9 @@ class MicropostsController < ApplicationController
 		@micropost = current_user.microposts.build(micropost_params)
 		@micropost.in_reply_to = @micropost.including_replies
 		to_user_str = @micropost.in_reply_to
-		to_user = User.find_by(name: to_user_str)
+		to_user = User.find_by(id_number: to_user_str)
+		to_user_id = to_user.id_number unless to_user.nil?
+		to_user_name = to_user.name 	unless to_user.nil?
 		if @micropost.valid?
 			if to_user_str.nil?
 				flash[:success] = "Micropost is created!"
@@ -15,7 +17,7 @@ class MicropostsController < ApplicationController
 			elsif !to_user_str.nil? && to_user.nil?
 				flash[:danger] = "Cannot find the reply user..."
 			else
-				flash[:success] = "reply to #{to_user_str}!"
+				flash[:success] = "reply to \"#{to_user_name}\"(@#{to_user_id})!"
 				@micropost.save
 			end
 			redirect_to root_url

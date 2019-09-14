@@ -2,6 +2,7 @@
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
 	<span class="user">
 		<%= link_to micropost.user.name, micropost.user %>
+		<span id="micropost_id">(@<%= micropost.user.id_number %>)</span>
 	</span>
 	<span class="content">
 		<%= simple_format(h(micropost.content)) %>

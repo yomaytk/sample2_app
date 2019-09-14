@@ -10,7 +10,7 @@ class Micropost < ApplicationRecord
 	def including_replies 
 		if content[0] == "@"
 			at_to_user = content.split(".")[0]
-			in_reply_to = at_to_user[1, at_to_user.length-1]
+			id_number = at_to_user[1, at_to_user.length-1]
 		end
 	end
 
