@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
 		@micropost.messages_to_id = params[:id2]
 		if @micropost.save
 			@microposts = @user.message_feed(@you).paginate(page: params[:@page])			
-			flash[:success] = "send message to #{@you.name}(@#{@you.id_number})!"
+			flash[:success] = "send message to \"#{@you.name}\"(@#{@you.id_number})!"
 			redirect_to "/users/#{@user.id}/messages/#{@you.id}"
 		else
 			render 'users/message'
