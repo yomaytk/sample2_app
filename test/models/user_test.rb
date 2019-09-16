@@ -108,7 +108,8 @@ class UserTest < ActiveSupport::TestCase
       assert michael.feed.include?(post_following)
     end
     # confirm my own microposts
-    michael.microposts.each do |post_self|
+		michael.microposts.each do |post_self|
+			next unless post_self.messages_to_id == -1 
       assert michael.feed.include?(post_self)
     end
     # confirm microposts of not following user

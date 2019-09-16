@@ -43,7 +43,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
 		# confirm count of user having multiple microposts
 		log_in_as(@user)
 		get root_path
-		count = @user.microposts.count
+		count = @user.feed_own.count
 		assert_match "#{count} microposts", response.body
 		# confirm count of user having one micropos
 		log_in_as(@other_user)

@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-<% provide(:post_url, signup_path) %>
+<% provide(:post_url, 'http://localhost:3000/users/'+params[:id1]+'/messages/'+params[:id2]) %>
 
 <div class="row">
   <aside class="col-md-4">
@@ -15,7 +15,7 @@
 		<%= render 'shared/micropost_form'%>
 	</aside>
 	<div class="col-md-8">
-    <% if @microposts.any? %>
+    <% if !@microposts.nil? %>
       <h3>Microposts (<%= @microposts.count %>)</h3>
       <ol class="microposts">
         <%= render @microposts %>
