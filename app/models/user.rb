@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
 	has_many :microposts, dependent: :destroy
+	scope :microposts, -> { where("messages_to_id == -1") }
 	has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
 																	dependent:   :destroy
@@ -78,9 +79,14 @@ class User < ApplicationRecord
 	def feed
     following_ids = "SELECT followed_id FROM relationships
 											WHERE follower_id = :user_id"
-    Micropost.where("user_id IN (#{following_ids})
-											OR user_id = :user_id OR in_reply_to = :user_id_number", user_id: id, user_id_number: id_number)
-  end																					
+    Micropost.where("(user_id IN (#{following_ids})
+											OR user_id = :user_id OR in_reply_to = :user_id_number)", user_id: id, user_id_number: id_number)
+	end																		
+	
+	def message_feed(you)
+		Micropost.where("(user_id = :me_id AND messages_to_id = :you_id) OR \ 
+												(user_id = :you_id AND messages_to_id = :me_id)", me_id: id, you_id: you.id)
+	end
 
 	def following?(other_user)
 		following.include?(other_user)

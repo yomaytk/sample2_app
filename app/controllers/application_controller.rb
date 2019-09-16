@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	private
+
+		def micropost_params
+			params.require(:micropost).permit(:content, :picture, :messages_to_id)
+		end
+
 end

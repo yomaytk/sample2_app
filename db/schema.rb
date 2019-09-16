@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_14_001333) do
+ActiveRecord::Schema.define(version: 2019_09_16_045855) do
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "from"
+    t.integer "to"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["from"], name: "index_messages_on_from"
+    t.index ["to"], name: "index_messages_on_to"
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
@@ -19,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_09_14_001333) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "picture"
     t.string "in_reply_to"
+    t.integer "messages_to_id"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 

@@ -6,6 +6,7 @@ class MicropostsController < ApplicationController
 	def create
 		@micropost = current_user.microposts.build(micropost_params)
 		@micropost.in_reply_to = @micropost.including_replies
+		@micropost.messages_to_id = -1
 		to_user_str = @micropost.in_reply_to
 		to_user = User.find_by(id_number: to_user_str)
 		to_user_id = to_user.id_number unless to_user.nil?
@@ -34,10 +35,6 @@ class MicropostsController < ApplicationController
 	end
 
 	private
-
-    def micropost_params
-      params.require(:micropost).permit(:content, :picture)
-		end
 
 		def correct_user
 			@micropost = current_user.microposts.find_by(id: params[:id])

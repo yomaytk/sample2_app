@@ -6,6 +6,7 @@ class Micropost < ApplicationRecord
 	validates	 :user_id, presence: true
 	validates :content, presence: true, length: { maximum: 140 }
 	validate :picture_size
+	# validates	:messages_to_id, presence: true      <--- why???
 
 	def including_replies 
 		if content[0] == "@"
