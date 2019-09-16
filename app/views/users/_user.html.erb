@@ -3,8 +3,10 @@
 	<%= link_to user.name, user %>
 	<span id="micropost_id">(@<%= user.id_number %>)</span>
 	<br>
+	| <%= link_to "Send messages", "/users/#{current_user.id}/messages/#{user.id}"%>
+	<br>
 	<% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, method: :delete,
+    | <%= link_to "Delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>
 </li>

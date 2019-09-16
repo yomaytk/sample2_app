@@ -13,6 +13,11 @@
         <%= render 'shared/stats' %>
 		</section>
 		<%= render 'shared/micropost_form'%>
+		<br>
+		<br>
+		<%= link_to gravatar_for(@you, size: 70), current_user %>
+		<p id="you_name_on_messages"><%= @you.name %></p>
+		<span><%= link_to "view \"#{@you.name}\" profile", @you %></span>
 	</aside>
 	<div class="col-md-8">
     <% if !@microposts.nil? %>
@@ -20,6 +25,7 @@
       <ol class="microposts">
         <%= render @microposts %>
 			</ol>
+			<%= will_paginate @microposts %>
     <% end %>
   </div>
 </div>

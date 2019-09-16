@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 		get '/login', to: 'sessions#new'
 		post '/login', to: 'sessions#create'
 		delete '/logout', to: 'sessions#destroy'
+		get '/logout', to: 'sessions#logout'
 
 		get '/password_resets', to: 'password_resets#new'
 		get '/microposts',	to: 'static_pages#home'

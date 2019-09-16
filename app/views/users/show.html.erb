@@ -5,8 +5,11 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-      </h1>
-		</section>
+			</h1>
+			<% unless current_user == @user %>
+				<p><%= link_to "Send messages", "/users/#{current_user.id}/messages/#{@user.id}" %></p>
+			<% end %>
+				</section>
 		<section class="stats">
         <%= render 'shared/stats' %>
     </section>

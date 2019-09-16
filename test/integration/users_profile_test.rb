@@ -4,11 +4,14 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
   def setup
-    @user = users(:michael)
+		@user = users(:michael)
+		@other = users(:archer)
   end
 
-  test "profile display" do
-    get user_path(@user)
+	test "profile display on own user" do
+		log_in_as(@user)
+		get user_path(@user)
+		@other = @user
     assert_template 'users/show'
     assert_select 'title', full_title(@user.name)
     assert_select 'h1', text: @user.name
@@ -20,6 +23,14 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 		end
 		assert_match @user.following.count.to_s, response.body
 		assert_match @user.followers.count.to_s, response.body
+		assert_select "a[href=?]", "/users/#{@user.id}/messages/#{@other.id}", count: 0
+	end
+
+	test "profile display on other user" do
+		log_in_as(@user)
+		get user_path(@other)
+		assert_select "a[href=?]", "/users/#{@user.id}/messages/#{@other.id}", count: 1
+		assert_match "Send messages", response.body
 	end
 
 end

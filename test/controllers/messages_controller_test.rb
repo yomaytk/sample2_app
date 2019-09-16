@@ -16,6 +16,18 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 		message_feed_count = @user.message_feed(@other).count
 		assert_equal message_feed_count, 3
 		assert_match "Microposts (#{message_feed_count})", response.body
+		assert_difference "@user.message_feed(@other).count", 1 do
+			post "/users/#{@user.id}/messages/#{@other.id}", params: { micropost: { content: "Hello, World!",
+																																							messages_to_id: @other.id } }
+		end
+		# confirm login @you user messages
+		delete logout_path
+		assert_not is_logged_in?
+		log_in_as(@other)
+		get "/users/#{@other.id}/messages/#{@user.id}"
+		message_feed_count = @other.message_feed(@user).count
+		assert_equal message_feed_count, 4
+		assert_match "Microposts (#{message_feed_count})", response.body
 		# confirm cannot watch other user messages
 		delete logout_path
 		assert_not is_logged_in?
