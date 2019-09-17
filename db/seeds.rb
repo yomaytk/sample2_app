@@ -17,6 +17,16 @@ User.create!(name:  "Example User",
 							id_number: "example user",
 							follower_notification_flag: 1)
 
+User.create!(name:  "tanaka",
+							email: "runrunabout777@gmail.com",
+							password:              "tanaka",
+							password_confirmation: "tanaka",
+							admin: false, 
+							activated: true, 
+							activated_at: Time.zone.now,
+							id_number: "panaka",
+							follower_notification_flag: 1)
+
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"

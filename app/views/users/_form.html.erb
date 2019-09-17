@@ -18,7 +18,7 @@
 	<%= f.password_field :password_confirmation, class: 'form-control' %>
 	
 	<div id="notification_box">
-		<%= label_tag :follower_notification_flag, "follower notification by email" %>
+		<%= f.label :follower_notification_flag, "follower notification by email" %>
 		<%= check_box_tag :follower_notification_flag %>
 	</div>
 
