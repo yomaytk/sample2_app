@@ -18,5 +18,11 @@ class UserMailer < ApplicationMailer
   def password_reset(user)
     @user = user
     mail to: user.email, subject: "Password reset"
-  end
+	end
+	
+	def follower_notification(user, following)
+		@user = user
+		@following = following
+		mail to: user.email, subject: "You are followed!"
+	end
 end

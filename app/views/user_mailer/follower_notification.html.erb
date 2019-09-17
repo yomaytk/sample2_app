@@ -1,0 +1,14 @@
+<h1>Follower notification</h1>
+
+<% unless @following.nil? %>
+	<p>
+		<%= "\"#{@following.name}\"(@#{@following.id_number}) followed you !" %>
+	</p>
+	<p>
+		<%= "Let\'s Check \"#{@following.name}\" profile !"%>
+	</p>
+	<p>
+		↓↓↓↓↓↓
+	</p>
+	<%= link_to "#{@following.name}", user_url(@following) %>
+<% end %>

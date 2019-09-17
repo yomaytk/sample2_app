@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
 			flash[:success] = "send message to \"#{@you.name}\"(@#{@you.id_number})!"
 			redirect_to "/users/#{@user.id}/messages/#{@you.id}"
 		else
+			@microposts = @user.message_feed(@you).paginate(page: params[:@page])	
 			render 'users/message'
 		end
 	end

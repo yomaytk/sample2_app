@@ -22,6 +22,21 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ["noreply@example.com"], mail.from
     assert_match user.reset_token,        mail.body.encoded
     assert_match CGI.escape(user.email),  mail.body.encoded
-  end
+	end
+	
+	test "follower_notification" do
+		user1 = users(:michael)
+		user2 = users(:archer)
+		mail = UserMailer.follower_notification(user1, user2)
+		assert_equal "You are followed!", mail.subject
+		assert_equal [user1.email], mail.to
+		assert_equal ["noreply@example.com"], mail.from
+		assert_match user2.name, mail.body.encoded
+		# confirm add queue after send email (whatever email send or not?)
+		assert_emails 1 do						
+      mail.deliver_now
+    end
+		assert_match "#{user2.name}", mail.body.encoded
+	end
 
 end

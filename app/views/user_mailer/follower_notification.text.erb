@@ -1,0 +1,6 @@
+<% unless @following.nil?%>
+	<%= "\"#{@following.name}\"(@#{@following.id_number}) follow you !" %>
+	<%= "Let\'s Check \"#{@following.name}\" profile below !"%>
+	<%= "↓↓↓↓↓↓"%>
+	<%= link_to "#{@following.name}", user_url(@following) %>
+<% end %>
