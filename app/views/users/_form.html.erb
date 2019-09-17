@@ -18,8 +18,10 @@
 	<%= f.password_field :password_confirmation, class: 'form-control' %>
 	
 	<div id="notification_box">
-		<%= f.label :follower_notification_flag, "follower notification by email" %>
-		<%= check_box_tag :follower_notification_flag %>
+		<%= f.label :follower_notification_flag, class: "checkbox inline" do %>
+			<%= f.check_box :follower_notification_flag %>
+			<span>Follower notification by email</span>
+		<% end %>
 	</div>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
