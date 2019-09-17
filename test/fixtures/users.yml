@@ -7,6 +7,7 @@ michael:
   activated: true
   activated_at: <%= Time.zone.now %>
   id_number: Michael
+  follower_notification_flag: 0
 
 archer:
   name: Sterling Archer
@@ -15,6 +16,16 @@ archer:
   activated: true
   activated_at: <%= Time.zone.now %>
   id_number: Sterling
+  follower_notification_flag: 1
+
+tester:
+  name: Tester
+  email: foo@example.gov
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+  id_number: tester
+  follower_notification_flag: 0
 
 lana:
   name: Lana Kane

@@ -5,7 +5,9 @@ class RelationshipsController < ApplicationController
 	def create
     @user = User.find(params[:followed_id])
 		current_user.follow(@user)
-		@user.send_follower_notification_email(current_user)
+		if @user.follower_notification_flag == 1
+			@user.send_follower_notification_email(current_user)
+		end
     respond_to do |format|
       format.html { redirect_to @user }
       format.js

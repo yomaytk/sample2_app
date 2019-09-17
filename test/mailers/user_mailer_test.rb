@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class UserMailerTest < ActionMailer::TestCase
+
+	def setup
+		@user1 = users(:michael)
+		@user2 = users(:archer)
+		@user3 = users(:tester)
+	end
+
 	test "account_activation" do
 		user = users(:michael)
 		user.activation_token = User.new_token
@@ -35,7 +42,7 @@ class UserMailerTest < ActionMailer::TestCase
 		# confirm add queue after send email (whatever email send or not?)
 		assert_emails 1 do						
       mail.deliver_now
-    end
+		end
 		assert_match "#{user2.name}", mail.body.encoded
 	end
 

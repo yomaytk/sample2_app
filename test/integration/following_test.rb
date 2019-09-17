@@ -5,6 +5,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
 	def setup
 		@user = users(:michael)
 		@other = users(:archer)
+		@user3 = users(:tester)
     log_in_as(@user)
   end
 
@@ -59,6 +60,26 @@ class FollowingTest < ActionDispatch::IntegrationTest
     @user.feed.paginate(page: 1).each do |micropost|
       assert_match (micropost.content), response.body			
     end
-  end
+	end
+	
+	test "follower notification checkbox test" do
+		assert_difference "Relationship.count", 1 do
+			@user.follow(@user3)
+		end
+		@user.unfollow(@user3)
+		assert_emails 0 do
+			@user.follow(@user3)
+		end
+		patch user_path(@user3), params: { user: { name: @user3.name, 
+																							email: @user3.email,
+																							password: "", 
+																							password_confirmation: "",
+																							follower_notification_flag: 1 } }
+		@user.unfollow(@user3)
+		mail = UserMailer.follower_notification(@user, @other)
+		assert_emails 1 do
+			mail.deliver_now
+		end
+	end
 
 end

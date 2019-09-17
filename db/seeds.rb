@@ -14,7 +14,8 @@ User.create!(name:  "Example User",
 							admin: true, 
 							activated: true, 
 							activated_at: Time.zone.now,
-							id_number: "example user")
+							id_number: "example user",
+							follower_notification_flag: 1)
 
 99.times do |n|
   name  = Faker::Name.name
@@ -26,7 +27,8 @@ User.create!(name:  "Example User",
 								password_confirmation: password,
 								activated: true, 
 								activated_at: Time.zone.now,
-								id_number: "example-#{n+1}")
+								id_number: "example-#{n+1}",
+								follower_notification_flag: 0)
 end
 
 # Micropost sample data

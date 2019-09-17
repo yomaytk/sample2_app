@@ -4,6 +4,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 	
 	def setup
 		@user = users(:michael)
+		@user3 = users(:tester)
 	end
 
 	test "unsuccesful edit" do
@@ -36,5 +37,16 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 		assert_equal name, @user.name
 		assert_equal email, @user.email
 	end
+
+	# test "follower notification checkbox test" do
+	# 	log_in_as(@user3)
+	# 	assert_difference "Relationship.count", 1 do
+	# 		@user3.follow(@user1)
+	# 	end
+	# 	# assert_emails 0 do
+	# 	# 	@user3.follow(@user1)
+	# 	# end
+	# 	# log_in_as(user1)
+	# end
 
 end

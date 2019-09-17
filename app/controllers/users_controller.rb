@@ -60,11 +60,16 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
 	end
+
+	def follower_notification_email
+		
+	end
 	
 	private
 
     def user_params
-			params.require(:user).permit(:name, :email, :id_number, :password, :password_confirmation)
+			params.require(:user).permit(:name, :email, :id_number,
+																		:password, :password_confirmation, :follower_notification_flag)
 		end
 
 		def correct_user

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_045855) do
+ActiveRecord::Schema.define(version: 2019_09_17_083233) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "from"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_09_16_045855) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.string "id_number"
+    t.integer "follower_notification_flag"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
