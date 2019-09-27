@@ -24,3 +24,9 @@ Things you may want to cover:
 * ...
 
 * URL: https://aqueous-anchorage-30391.herokuapp.com/
+
+rails チュートリアルのSNSサンプルアプリケーションです。
+現段階で施した拡張機能は以下の通り。
+・リプライ機能
+・メールによるフォロワーの通知機能
+・チャット機能
