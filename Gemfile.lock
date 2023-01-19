@@ -76,7 +76,7 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     coderay (1.1.2)
-    concurrent-ruby (1.1.5)
+    concurrent-ruby (1.1.10)
     crass (1.0.5)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -244,8 +244,8 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
+    globalid (1.0.1)
+      activesupport (>= 5.0)
     gravtastic (3.2.6)
     guard (2.15.1)
       formatador (>= 0.2.4)
@@ -403,7 +403,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.5)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
@@ -423,7 +423,7 @@ GEM
     will_paginate (3.1.8)
     xml-simple (1.1.5)
     xmlrpc (0.3.0)
-    zeitwerk (2.1.10)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
